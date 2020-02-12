@@ -51,14 +51,17 @@ window.onload = function() {
         balls.enableBody = true;
         var ball1 = balls.create(200, 200, 'ball');
         var ball2 = balls.create(200, 100, 'ball');
+        //var ball3 = balls.create(300, 200, 'ball');
         
         ball1.body.collideWorldBounds = true;
         ball2.body.collideWorldBounds = true;
         
-        ball1.body.velocity.setTo(200, 200);
-        ball1.body.bounce.setTo(1, 1);
-        ball2.body.velocity.setTo(200, 200);
-        ball2.body.bounce.setTo(1, 1);
+        //ball1.body.velocity.setTo(200, 200);
+        //ball1.body.bounce.setTo(1, 1);
+        //ball2.body.velocity.setTo(200, 200);
+        //ball2.body.bounce.setTo(1, 1);
+        balls.body.velocity.setTo(200, 200);
+        balls.body.bounce.setTo(1, 1);
         
         //game.physics.arcade.collide(ball1, ball2);
         //game.physics.arcade.collide(player, ball2);
@@ -67,7 +70,7 @@ window.onload = function() {
     
     function update() {
         
-        //game.physics.arcade.collide(balls, balls);
+        game.physics.arcade.collide(balls, balls);
         //game.physics.arcade.collide(player, balls);
         
         // Accelerate the 'logo' sprite towards the cursor,
