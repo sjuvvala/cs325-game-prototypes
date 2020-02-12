@@ -46,6 +46,10 @@ window.onload = function() {
         
         ball = game.add.sprite(200, 200, 'ball');
         
+        ball.body.collideWorldBounds = true;
+        
+        ball.body.velocity.setTo(200, 200);
+        ball.body.bounce.setTo(1, 1);
         
     }
     
