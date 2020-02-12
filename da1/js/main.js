@@ -48,8 +48,8 @@ window.onload = function() {
         // new trajectory.
        // bouncy.rotation = game.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
         
-    if (game.input.mousePointer.isDown)
-    {
+    //if (game.input.mousePointer.isDown)
+    //{
         //  400 is the speed it will move towards the mouse
         game.physics.arcade.moveToPointer(player, 800);
 
@@ -58,11 +58,11 @@ window.onload = function() {
         {
             player.body.velocity.setTo(0, 0);
         }
-    }
-    else
-    {
-        player.body.velocity.setTo(0, 0);
-    }
+    //}
+    //else
+    //{
+       // player.body.velocity.setTo(0, 0);
+    //}
         
     }
 };
