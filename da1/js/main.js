@@ -61,6 +61,7 @@ window.onload = function() {
         ball2.body.bounce.setTo(1, 1);
         
         game.physics.arcade.collide(ball1, ball2);
+        game.physics.arcade.collide(player, ball2);
         
     }
     
