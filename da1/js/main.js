@@ -48,7 +48,7 @@ window.onload = function() {
         // new trajectory.
        // bouncy.rotation = game.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
         
-        game.physics.enable(player, Phaser.Physics.ARCADE);
+        game.physics.arcade.moveToPointer(player, 400);
         
         if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
         {
