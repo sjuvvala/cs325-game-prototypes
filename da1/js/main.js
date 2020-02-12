@@ -49,10 +49,10 @@ window.onload = function() {
         
         balls = game.add.group();
         balls.enableBody = true;
-        for(var i = 0; i < 4; i++){
-            var ball = balls.create(100, i * 50, 'ball');
+        for(var i = 0; i < 9; i++){
+            var ball = balls.create(100 + i, i * 50, 'ball');
             ball.body.collideWorldBounds = true;
-            ball.body.velocity.setTo(200, 200);
+            ball.body.velocity.setTo(200, 200+i);
             ball.body.bounce.setTo(1, 1);
         }
         
