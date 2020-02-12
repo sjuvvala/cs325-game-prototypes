@@ -26,7 +26,7 @@ window.onload = function() {
         game.physics.startSystem(Phaser.Physics.ARCADE);
         
         // Create a sprite at the center of the screen using the 'logo' image.
-        player = game.add.sprite( game.world.centerX, game.world.centerY, 'thing' );
+        player = game.add.sprite( 500, 500, 'thing' );
         game.physics.enable(player, Phaser.Physics.ARCADE);
         player.body.collideWorldBounds = true;
         
@@ -49,19 +49,27 @@ window.onload = function() {
         
         balls = game.add.group();
         balls.enableBody = true;
-        var ball1 = balls.create(200, 200, 'ball');
-        var ball2 = balls.create(200, 100, 'ball');
+        for(var i = 0; i < 5; i++){
+            var ball = balls.create(100, i * 50, 'ball');
+            ball.body.collideWorldBounds = true;
+            ball.body.velocity.setTo(200, 200);
+            ball.body.bounce.setTo(1, 1);
+        }
+        
+        
+        //var ball1 = balls.create(200, 200, 'ball');
+        //var ball2 = balls.create(200, 100, 'ball');
         //var ball3 = balls.create(300, 200, 'ball');
         
-        ball1.body.collideWorldBounds = true;
-        ball2.body.collideWorldBounds = true;
+        //ball1.body.collideWorldBounds = true;
+        //ball2.body.collideWorldBounds = true;
         
         //ball1.body.velocity.setTo(200, 200);
         //ball1.body.bounce.setTo(1, 1);
         //ball2.body.velocity.setTo(200, 200);
         //ball2.body.bounce.setTo(1, 1);
-        balls.body.velocity.setTo(200, 200);
-        balls.body.bounce.setTo(1, 1);
+        //balls.body.velocity.setTo(200, 200);
+        //balls.body.bounce.setTo(1, 1);
         
         //game.physics.arcade.collide(ball1, ball2);
         //game.physics.arcade.collide(player, ball2);
