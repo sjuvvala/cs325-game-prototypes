@@ -46,7 +46,7 @@ window.onload = function() {
         
         game.physics.enable(ball, Phaser.Physics.ARCADE);
         
-        ball = game.add.sprite(200, 400, 'ball');
+        ball = game.add.sprite(200, 200, 'ball');
         
         ball.body.collideWorldBounds = true;
         
