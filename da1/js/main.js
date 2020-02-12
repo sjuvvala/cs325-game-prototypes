@@ -44,7 +44,7 @@ window.onload = function() {
         var text = game.add.text( game.world.centerX, 15, "Build something amazing.", style );
         text.anchor.setTo( 0.5, 0.0 );
         
-        
+        ball = game.add.sprite(200, 200, 'ball');
         
         
     }
