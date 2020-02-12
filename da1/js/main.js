@@ -50,7 +50,7 @@ window.onload = function() {
         balls = game.add.group();
         balls.enableBody = true;
         var ball1 = balls.create(200, 200, 'ball');
-        var ball2 = balls.create(100, 100, 'ball');
+        var ball2 = balls.create(200, 100, 'ball');
         
         ball1.body.collideWorldBounds = true;
         ball2.body.collideWorldBounds = true;
