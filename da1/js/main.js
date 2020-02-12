@@ -19,7 +19,7 @@ window.onload = function() {
     }
     
     var player;
-    var ball;
+    var balls;
     
     function create() {
         
@@ -28,6 +28,7 @@ window.onload = function() {
         // Create a sprite at the center of the screen using the 'logo' image.
         player = game.add.sprite( game.world.centerX, game.world.centerY, 'thing' );
         game.physics.enable(player, Phaser.Physics.ARCADE);
+        player.body.collideWorldBounds = true;
         
         // Anchor the sprite at its center, as opposed to its top-left corner.
         // so it will be truly centered.
@@ -46,7 +47,10 @@ window.onload = function() {
         
         //game.physics.enable(ball, Phaser.Physics.ARCADE);
         
-        ball = game.add.sprite(200, 200, 'ball');
+        balls = game.add.group();
+        balls.enableBody = true;
+        var ball1 = balls.create(200, 200, 'ball');
+        var ball2 = balls.create(100, 100, 'ball');
         
         //ball.body.collideWorldBounds = true;
         
