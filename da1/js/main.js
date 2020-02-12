@@ -22,7 +22,7 @@ window.onload = function() {
     function create() {
         // Create a sprite at the center of the screen using the 'logo' image.
         player = game.add.sprite( game.world.centerX, game.world.centerY, 'thing' );
-        game.physics.enable(sprite, Phaser.Physics.ARCADE);
+        game.physics.enable(player, Phaser.Physics.ARCADE);
         
         // Anchor the sprite at its center, as opposed to its top-left corner.
         // so it will be truly centered.
@@ -48,11 +48,11 @@ window.onload = function() {
         // new trajectory.
        // bouncy.rotation = game.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
         
-        game.physics.enable(sprite, Phaser.Physics.ARCADE);
+        game.physics.enable(player, Phaser.Physics.ARCADE);
         
-        if (Phaser.Rectangle.contains(sprite.body, game.input.x, game.input.y))
+        if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
         {
-            sprite.body.velocity.setTo(0, 0);
+            player.body.velocity.setTo(0, 0);
         }
         
     }
