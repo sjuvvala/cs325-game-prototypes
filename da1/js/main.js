@@ -15,11 +15,16 @@ window.onload = function() {
     function preload() {
         // Load an image and call it 'logo'.
         game.load.image( 'thing', 'assets/thingw.png' );
+        game.load.image('ball', 'assets/red_ball.png');
     }
     
     var player;
+    var ball;
     
     function create() {
+        
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+        
         // Create a sprite at the center of the screen using the 'logo' image.
         player = game.add.sprite( game.world.centerX, game.world.centerY, 'thing' );
         game.physics.enable(player, Phaser.Physics.ARCADE);
@@ -38,6 +43,10 @@ window.onload = function() {
         var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
         var text = game.add.text( game.world.centerX, 15, "Build something amazing.", style );
         text.anchor.setTo( 0.5, 0.0 );
+        
+        
+        
+        
     }
     
     function update() {
@@ -48,8 +57,6 @@ window.onload = function() {
         // new trajectory.
        // bouncy.rotation = game.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
         
-    //if (game.input.mousePointer.isDown)
-    //{
         //  400 is the speed it will move towards the mouse
         game.physics.arcade.moveToPointer(player, 600);
 
@@ -58,11 +65,6 @@ window.onload = function() {
         {
             player.body.velocity.setTo(0, 0);
         }
-    //}
-    //else
-    //{
-       // player.body.velocity.setTo(0, 0);
-    //}
         
     }
 };
