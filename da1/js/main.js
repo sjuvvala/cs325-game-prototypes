@@ -51,7 +51,7 @@ window.onload = function() {
     if (game.input.mousePointer.isDown)
     {
         //  400 is the speed it will move towards the mouse
-        game.physics.arcade.moveToPointer(player, 400);
+        game.physics.arcade.moveToPointer(player, 800);
 
         //  if it's overlapping the mouse, don't move any more
         if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
