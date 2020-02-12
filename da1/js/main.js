@@ -48,12 +48,21 @@ window.onload = function() {
         // new trajectory.
        // bouncy.rotation = game.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
         
+    if (game.input.mousePointer.isDown)
+    {
+        //  400 is the speed it will move towards the mouse
         game.physics.arcade.moveToPointer(player, 400);
-        
+
+        //  if it's overlapping the mouse, don't move any more
         if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
         {
             player.body.velocity.setTo(0, 0);
         }
+    }
+    else
+    {
+        player.body.velocity.setTo(0, 0);
+    }
         
     }
 };
