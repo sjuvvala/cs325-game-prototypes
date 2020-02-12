@@ -52,10 +52,13 @@ window.onload = function() {
         var ball1 = balls.create(200, 200, 'ball');
         var ball2 = balls.create(100, 100, 'ball');
         
-        //ball.body.collideWorldBounds = true;
+        ball1.body.collideWorldBounds = true;
+        ball2.body.collideWorldBounds = true;
         
-        //ball.body.velocity.setTo(200, 200);
-        //ball.body.bounce.setTo(1, 1);
+        ball1.body.velocity.setTo(200, 200);
+        ball1.body.bounce.setTo(1, 1);
+        
+        game.physics.arcade.collide(ball1, ball2);
         
     }
     
