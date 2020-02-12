@@ -60,12 +60,16 @@ window.onload = function() {
         ball2.body.velocity.setTo(200, 200);
         ball2.body.bounce.setTo(1, 1);
         
-        game.physics.arcade.collide(ball1, ball2);
-        game.physics.arcade.collide(player, ball2);
+        //game.physics.arcade.collide(ball1, ball2);
+        //game.physics.arcade.collide(player, ball2);
         
     }
     
     function update() {
+        
+        game.physics.arcade.collide(ball1, ball2);
+        game.physics.arcade.collide(player, ball2);
+        
         // Accelerate the 'logo' sprite towards the cursor,
         // accelerating at 500 pixels/second and moving no faster than 500 pixels/second
         // in X or Y.
