@@ -83,6 +83,10 @@ window.onload = function() {
         
     }
     
+    function die(player, balls){
+        player.kill();
+    }
+    
     function update() {
         
         game.physics.arcade.collide(balls, balls);
@@ -104,5 +108,7 @@ window.onload = function() {
             player.body.velocity.setTo(0, 0);
         }
         
+        game.physics.arcade.overlap(player, balls, die, null, this);
     }
+   
 };
