@@ -90,7 +90,7 @@ window.onload = function() {
     function update() {
         
         game.physics.arcade.collide(balls, balls);
-        game.physics.arcade.collide(player, balls);
+        //game.physics.arcade.collide(player, balls);
         
         // Accelerate the 'logo' sprite towards the cursor,
         // accelerating at 500 pixels/second and moving no faster than 500 pixels/second
