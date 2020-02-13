@@ -59,7 +59,7 @@ window.onload = function() {
         for(var i = 0; i < 3; i++){
             var ball = balls.create(i * 50 , i * 50, 'ball');
             ball.body.collideWorldBounds = true;
-            ball.body.velocity.setTo(150, 150);
+            ball.body.velocity.setTo(-150, -150);
             ball.body.bounce.setTo(1, 1);
         }
         
