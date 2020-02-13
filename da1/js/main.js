@@ -49,10 +49,17 @@ window.onload = function() {
         
         balls = game.add.group();
         balls.enableBody = true;
-        for(var i = 0; i < 9; i++){
+        for(var i = 0; i < 3; i++){
             var ball = balls.create(100 + i, i * 50, 'ball');
             ball.body.collideWorldBounds = true;
-            ball.body.velocity.setTo(200, 200+i);
+            ball.body.velocity.setTo(150, 150);
+            ball.body.bounce.setTo(1, 1);
+        }
+        
+        for(var i = 0; i < 3; i++){
+            var ball = balls.create(i * 50 , i * 50, 'ball');
+            ball.body.collideWorldBounds = true;
+            ball.body.velocity.setTo(150, 150);
             ball.body.bounce.setTo(1, 1);
         }
         
@@ -89,7 +96,7 @@ window.onload = function() {
        // bouncy.rotation = game.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
         
         //  400 is the speed it will move towards the mouse
-        game.physics.arcade.moveToPointer(player, 600);
+        game.physics.arcade.moveToPointer(player, 800);
 
         //  if it's overlapping the mouse, don't move any more
         if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
