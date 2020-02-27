@@ -2,7 +2,7 @@
 
 GameStates.makeMainMenu = function( game, shared ) {
 
-	var music = null;
+	//var music = null;
 	var playButton = null;
     
     function startGame(pointer) {
@@ -23,8 +23,8 @@ GameStates.makeMainMenu = function( game, shared ) {
             //	Here all we're doing is playing some music and adding a picture and button
             //	Naturally I expect you to do something significantly better :)
     
-            music = game.add.audio('titleMusic');
-            music.play();
+            //music = game.add.audio('titleMusic');
+            //music.play();
     
             game.add.sprite(0, 0, 'titlePage');
     
