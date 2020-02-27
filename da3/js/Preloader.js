@@ -27,7 +27,7 @@ GameStates.makePreloader = function( game ) {
 	    //game.load.image('playButton', 'assets/start_button_ac.png');
             //game.load.atlas('playButton', 'assets/play_button.png', 'assets/play_button.json');
 	    game.load.atlas('playButton', 'assets/start_button_ac.png', 'assets/start_button_ac.json');
-            game.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
+            //game.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
             //	+ lots of other required assets here
             game.load.image( 'logo', 'assets/phaser.png' );
         },
