@@ -24,9 +24,9 @@ GameStates.makePreloader = function( game ) {
             //	Here we load the rest of the assets our game needs.
             //	As this is just a Project Template I've not provided these assets, swap them for your own.
             game.load.image('titlePage', 'assets/title_ac.png');
-	    game.load.image('playButton', 'assets/start_button_ac.png');
-            //game.load.atlas('playButton', 'assets/play_button.png', 'assets/play_button.json');
-            //game.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
+	    //game.load.image('playButton', 'assets/start_button_ac.png');
+            game.load.atlas('playButton', 'assets/play_button.png', 'assets/play_button.json');
+            game.load.audio('titleMusic', ['assets/Poppers and Prosecco.mp3']);
             //	+ lots of other required assets here
             game.load.image( 'logo', 'assets/phaser.png' );
         },
@@ -49,11 +49,11 @@ GameStates.makePreloader = function( game ) {
             //	If you don't have any music in your game then put the game.state.start line into the create function and delete
             //	the update function completely.
             
-            /*if (game.cache.isSoundDecoded('titleMusic') && ready == false)
+            if (game.cache.isSoundDecoded('titleMusic') && ready == false)
             {
                 ready = true;
                 game.state.start('MainMenu');
-            }*/
+            }
     
         }
     
