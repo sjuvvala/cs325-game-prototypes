@@ -32,7 +32,10 @@ GameStates.makePreloader = function( game ) {
 			
 			game.load.image('background_g', 'assets/background.png');
 			game.load.image('ground', 'assets/ground.png');
-			game.load.image('cattree', 'assets/cat_tree.png');
+			game.load.image('ct0', 'assets/cat_tree0.png');
+			game.load.image('ct1', 'assets/cat_tree1.png');
+			game.load.image('ct2', 'assets/cat_tree2.png');
+			game.load.image('ct3', 'assets/cat_tree3.png');
 			game.load.image('blockk', 'assets/block.png')
 			
 			game.load.image('brown', 'assets/norm_brown.png');
@@ -40,6 +43,9 @@ GameStates.makePreloader = function( game ) {
 			game.load.image('gray', 'assets/norm_gray.png');
 			game.load.image('tux', 'assets/norm_tuxedo.png');
 			game.load.image('white', 'assets/norm_white.png');
+			
+			game.load.spritesheet('eyesL', 'assets/bigeyeLSheet.png', 60, 26);
+			game.load.spritesheet('eyesR', 'assets/bigeyeRSheet.png', 60, 26);
 			
 			game.load.spritesheet('alien', 'assets/alien_cat.png', 153, 189);
 			game.load.spritesheet('gran', 'assets/old_lady.png', 368, 465);
