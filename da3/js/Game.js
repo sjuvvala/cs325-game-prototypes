@@ -10,12 +10,16 @@ GameStates.makeGame = function( game, shared ) {
 	var bl = null;
 	
 	var gray = null, brown = null, calico = null, tux = null, white = null; //cats
-	var hypnoeye_gr = null, hypnoeye_br = null, hypnoeye_cal = null, hypnoeye_tux = null, hypnoeye_wh = null; //possessed eyes
+	
+	var granny = null;
+	//var timer = null;
 	
 	var cursors = null;
-	//uses spacebar
-	var hypnoKey = null;
+	var hypnoKey = null; //uses spacebar
 	
+	//var count = null; //keeps track of how many cats converted, at 5, win game
+	var score = null;
+    var scoreText = null;
     
     function quitGame() {
 
@@ -24,58 +28,75 @@ GameStates.makeGame = function( game, shared ) {
 
         //  Then let's go back to the main menu.
         game.state.start('MainMenu');
-
     }
 	
-	function hypnotize(alienCat, somecat, eyes, progress, alienFacing){ //for facing, 0-left 1-right
+	function scoreincr(){
+		score += 1;
+		scoreText.text = 'cats converted: ' + score;
+	}
+	
+	
+	//this doesnt work the way i want but that ok (hypnotizing process starts over again once stopped instead of continuing from where it left off)
+	function hypnotize(alienCat, somecat, alienFacing){ //for facing, 0-left 1-right
+	    var fr = somecat.currframe;
 		if(hypnoKey.isDown){
 			if(alienFacing === 0){alienCat.frame = 2;}
 			else if(alienFacing === 1){alienCat.frame = 1;}
 			
-			eyes.alpha = 1.0;
+			somecat.hypnoeye.alpha = 1.0;
 			
-			if(!(hypnoKey.downDuration(1000))){
-				progress++;
-				eyes.frame = progress;
-				if(progress === 5){
+			if(!(hypnoKey.downDuration(500))){
+				fr++;
+				somecat.hypnoeye.frame = fr;
+				if(fr === 5){
 					if(alienFacing === 0){alienCat.frame = 3;}
 					else if(alienFacing === 1){alienCat.frame = 0;}
+					somecat.hypnoeye.alpha = 1.0;
+					somecat.currframe = fr;
+					return;
+				}
+			}
+			if(!(hypnoKey.downDuration(1000))){
+				fr++;
+				somecat.hypnoeye.frame = fr;
+				if(fr === 5){
+					if(alienFacing === 0){alienCat.frame = 3;}
+					else if(alienFacing === 1){alienCat.frame = 0;}
+					somecat.hypnoeye.alpha = 1.0;
+					somecat.currframe = fr;
+					return;
+				}
+			}
+			if(!(hypnoKey.downDuration(1500))){
+				fr++;
+				somecat.hypnoeye.frame = fr;
+				if(fr === 5){
+					if(alienFacing === 0){alienCat.frame = 3;}
+					else if(alienFacing === 1){alienCat.frame = 0;}
+					somecat.hypnoeye.alpha = 1.0;
+					somecat.currframe = fr;
 					return;
 				}
 			}
 			if(!(hypnoKey.downDuration(2000))){
-				progress++;
-				eyes.frame = progress;
-				if(progress === 5){
+				fr++;
+				somecat.hypnoeye.frame = fr;
+				if(fr === 5){
 					if(alienFacing === 0){alienCat.frame = 3;}
 					else if(alienFacing === 1){alienCat.frame = 0;}
+					somecat.hypnoeye.alpha = 1.0;
+					somecat.currframe = fr;
 					return;
 				}
 			}
-			if(!(hypnoKey.downDuration(3000))){
-				progress++;
-				eyes.frame = progress;
-				if(progress === 5){
+			if(!(hypnoKey.downDuration(2500))){
+				fr++;
+				somecat.hypnoeye.frame = fr;
+				if(fr === 5){
 					if(alienFacing === 0){alienCat.frame = 3;}
 					else if(alienFacing === 1){alienCat.frame = 0;}
-					return;
-				}
-			}
-			if(!(hypnoKey.downDuration(4000))){
-				progress++;
-				eyes.frame = progress;
-				if(progress === 5){
-					if(alienFacing === 0){alienCat.frame = 3;}
-					else if(alienFacing === 1){alienCat.frame = 0;}
-					return;
-				}
-			}
-			if(!(hypnoKey.downDuration(5000))){
-				progress++;
-				eyes.frame = progress;
-				if(progress === 5){
-					if(alienFacing === 0){alienCat.frame = 3;}
-					else if(alienFacing === 1){alienCat.frame = 0;}
+					somecat.hypnoeye.alpha = 1.0;
+					somecat.currframe = fr;
 					return;
 				}
 			}
@@ -83,16 +104,63 @@ GameStates.makeGame = function( game, shared ) {
 		else if(!(hypnoKey.isDown)){
 			if(alienFacing === 0){alienCat.frame = 3;}
 			else if(alienFacing === 1){alienCat.frame = 0;}
-			eyes.alpha = 0.0;
-			return progress;
+			somecat.hypnoeye.alpha = 0.0;
+			somecat.currframe = fr;
 		}
-		return progress;
 	}
 	
+	//randomly generate what old lady does
+	function grannyActions(granny){
+		granny.looking = false;
+		var rint = game.rnd.integerInRange(0,4);
+		if(rint === 2){
+			granny.granSprite.animations.play('look');
+			//granny.granSprite.frame = 2;
+			game.time.events.add(1000, setLooking, this, granny);
+			//granny.looking = true;
+		}
+		else if(rint === 1){
+			granny.looking = false; //probably redundant
+			granny.granSprite.frame = 1;
+		}
+		else if(rint === 0){
+			granny.looking = false; //probably redundant
+			granny.granSprite.frame = 0
+		}
+		else if(rint === 3){
+			granny.granSprite.animations.play('look');
+			game.time.events.add(1000, setLooking, this, granny);
+			//granny.looking = true;
+		}
+		else if(rint === 4){
+			granny.looking = false; //probably redundant
+			granny.granSprite.frame = 0
+		}
+	}
+	function setLooking(granny){
+		granny.looking = true;
+	}
 	
+	/*function grannyLookUp(granny){
+		granny.granSprite.frame = game.rnd.integerInRange(0,2);
+		//granny.granSprite.frame = 1;
+	}*/
+	
+	//game over
+	function caught(granny){
+		if(hypnoKey.isDown && granny.looking){
+			alienCat.kill()
+			game.add.text( game.world.centerX, 100, "you've been caught!", { fontSize: '32px', fill: '#000', align: "center"});
+		}
+	}
+	
+	//............................................................................................
     return {
     
         create: function () {
+			
+			//game.time.events.add(1000, scoreincr, this, 7);
+			//game.time.events.loop(1000, scoreincr, this, 7);
     
             //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
             
@@ -174,17 +242,33 @@ GameStates.makeGame = function( game, shared ) {
 			bl.body.immovable = true;
 			
 			//other cats :3............................................................
-			gray = game.add.sprite(2, 213, 'gray');
-			game.physics.enable(gray, Phaser.Physics.ARCADE);
+			gray = { cat: game.add.sprite(2, 213, 'gray'), hypnoeye: game.add.sprite(53, 244, 'eyesR'), currframe: 0, isConverted: false };
+			game.physics.enable(gray.cat, Phaser.Physics.ARCADE);
+			gray.hypnoeye.alpha = 0.0;
 			
-			tux = game.add.sprite(51, 441, 'tux');
-			game.physics.enable(gray, Phaser.Physics.ARCADE);
+			tux = { cat: game.add.sprite(51, 441, 'tux'), hypnoeye: game.add.sprite(53, 470, 'eyesL'), currframe: 0, isConverted: false };
+			game.physics.enable(tux.cat, Phaser.Physics.ARCADE);
+			tux.hypnoeye.alpha = 0.0;
 			
-			brown = game.add.sprite(353, 492, 'brown');
-			game.physics.enable(gray, Phaser.Physics.ARCADE);
-			//their eyessss....................................
-			hypnoeye_gr = game.add.sprite(53, 244, 'eyesR'); hypnoeye_gr.alpha = 0.0;
-			hypnoeye_br = game.add.sprite(450, 523, 'eyesR'); hypnoeye_br.alpha = 0.0;
+			brown = { cat: game.add.sprite(353, 492, 'brown'), hypnoeye: game.add.sprite(450, 523, 'eyesR'), currframe: 0, isConverted: false };
+			game.physics.enable(brown.cat, Phaser.Physics.ARCADE);
+			brown.hypnoeye.alpha = 0.0;
+			
+			calico = { cat: game.add.sprite(502, 244, 'calico'), hypnoeye: game.add.sprite(504, 276, 'eyesL'), currframe: 0, isConverted: false };
+			game.physics.enable(calico.cat, Phaser.Physics.ARCADE);
+			calico.hypnoeye.alpha = 0.0;
+			
+			white = { cat: game.add.sprite(690, 443, 'white'), hypnoeye: game.add.sprite(813, 471, 'eyesR'), currframe: 0, isConverted: false };
+			game.physics.enable(white.cat, Phaser.Physics.ARCADE);
+			white.hypnoeye.alpha = 0.0;
+			
+			//gran......................................................................
+			granny = {granSprite: game.add.sprite(880, 180, 'gran'), looking: false };
+			granny.granSprite.animations.add('look', [1,1,2], 2, false);
+			game.time.events.loop(2700, grannyActions, this, granny);
+				//game.time.events.loop(5000, grannyActions, this, granny);
+				//timer = game.time.create(false); //no
+				//timer.loop(game.rnd.integerInRange(1000, 4000)) //no
 			
 			
 			//player + animations.......................................................
@@ -192,7 +276,7 @@ GameStates.makeGame = function( game, shared ) {
 			//game.physics.arcade.enable(alienCat);
 			game.physics.enable(alienCat, Phaser.Physics.ARCADE);
 			alienCat.body.bounce.y = 0.2;
-			alienCat.body.gravity.y = 500;
+			alienCat.body.gravity.y = 450;
 			alienCat.body.colliderWorldBounds = true;
 			
 			//actually frames go from 0-3, my bad, also i dont need animation right now
@@ -205,7 +289,10 @@ GameStates.makeGame = function( game, shared ) {
 			cursors = game.input.keyboard.createCursorKeys();
 			hypnoKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 			
-			//timer.................................................................
+			//count of cats converted
+			score = 0;
+			scoreText = game.add.text(16, 16, 'cats converted: 0', { fontSize: '16px', fill: '#000' });
+			
 			
         },
     
@@ -222,11 +309,11 @@ GameStates.makeGame = function( game, shared ) {
 			
 			//==================================================================
 			
-			//other important stuff...................................
-			var count = 0; //keeps track of how many cats converted, at 5, win game
-			
-			//hypno process for each cat
-			var p_gr = 0;
+			//win game
+			if(score === 5){
+				var wintext = game.add.text( game.world.centerX, 100, "you win.", { fontSize: '32px', fill: '#000', align: "center"  });
+				alienCat.kill(); //temporary fix
+			}
 			
 			//collide with platforms.........................
 			var hitGround = game.physics.arcade.collide(alienCat, ground);
@@ -236,8 +323,12 @@ GameStates.makeGame = function( game, shared ) {
 			var hitT0 = game.physics.arcade.collide(alienCat, ct0);
 			var hitBlock = game.physics.arcade.collide(alienCat, bl);
 			
-			//overlap with cats
-			var hitGray = game.physics.arcade.overlap(alienCat, gray);
+			//overlap with cats...................................
+			var hitGray = game.physics.arcade.overlap(alienCat, gray.cat);
+			var hitBrown = game.physics.arcade.overlap(alienCat, brown.cat);
+			var hitCalico = game.physics.arcade.overlap(alienCat, calico.cat);
+			var hitTux = game.physics.arcade.overlap(alienCat, tux.cat);
+			var hitWhite = game.physics.arcade.overlap(alienCat, white.cat);
 			
 			
 			//movement..................................................
@@ -256,12 +347,56 @@ GameStates.makeGame = function( game, shared ) {
 			}
 			//jump
 			if(cursors.up.isDown && alienCat.body.touching.down && (hitGround || hitBlock || hitT1 || hitT2 || hitT3 || hitT0) && !(hypnoKey.isDown)){
-				alienCat.body.velocity.y = -450;
+				alienCat.body.velocity.y = -400;
 			}
 			
 			//hypnotizing the cats.....................................
-			if(hitGray && hitT2){
-				p_gr = hypnotize(alienCat, gray, hypnoeye_gr, p_gr, 0);
+			if(hitGray && hitT2 && !hitT0){
+				//hypnotize(alienCat, gray, hypnoeye_gr, 0, 0);
+				//hypnotize(alienCat, gray.cat, gray.hypnoeye, 0, 0);
+				
+				caught(granny);
+				if(gray.currframe !== 5 && gray.isConverted === false){hypnotize(alienCat, gray, 0);}
+				if(gray.currframe === 5 && gray.isConverted === false){
+					gray.isConverted = true;
+					scoreincr();
+				}
+			}
+			
+			if(hitBrown && hitGround){
+				caught(granny);
+				if(brown.currframe !== 5 && brown.isConverted === false){hypnotize(alienCat, brown, 1);}
+				if(brown.currframe === 5 && brown.isConverted === false){
+					brown.isConverted = true;
+					scoreincr();
+				}
+			}
+			
+			if(hitCalico && hitBlock){
+				caught(granny);
+				if(calico.currframe !== 5 && calico.isConverted === false){hypnotize(alienCat, calico, 1);}
+				if(calico.currframe === 5 && calico.isConverted === false){
+					calico.isConverted = true;
+					scoreincr();
+				}
+			}
+			
+			if(hitTux && hitT0){
+				caught(granny);
+				if(tux.currframe !== 5 && tux.isConverted === false){hypnotize(alienCat, tux, 0);}
+				if(tux.currframe === 5 && tux.isConverted === false){
+					tux.isConverted = true;
+					scoreincr();
+				}
+			}
+			
+			if(hitWhite && hitGround){
+				caught(granny);
+				if(white.currframe !== 5 && white.isConverted === false){hypnotize(alienCat, white, 1);}
+				if(white.currframe === 5 && white.isConverted === false){
+					white.isConverted = true;
+					scoreincr();
+				}
 			}
 			
 
