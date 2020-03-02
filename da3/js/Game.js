@@ -113,7 +113,7 @@ GameStates.makeGame = function( game, shared ) {
 	function grannyActions(granny){
 		granny.looking = false;
 		var rint = game.rnd.integerInRange(0,4);
-		if(rint === 2){
+		if(rint === 2 || rint === 3){
 			granny.granSprite.animations.play('look');
 			//granny.granSprite.frame = 2;
 			game.time.events.add(1000, setLooking, this, granny);
@@ -123,16 +123,7 @@ GameStates.makeGame = function( game, shared ) {
 			granny.looking = false; //probably redundant
 			granny.granSprite.frame = 1;
 		}
-		else if(rint === 0){
-			granny.looking = false; //probably redundant
-			granny.granSprite.frame = 0
-		}
-		else if(rint === 3){
-			granny.granSprite.animations.play('look');
-			game.time.events.add(1000, setLooking, this, granny);
-			//granny.looking = true;
-		}
-		else if(rint === 4){
+		else if(rint === 0 || rint === 4){
 			granny.looking = false; //probably redundant
 			granny.granSprite.frame = 0
 		}
