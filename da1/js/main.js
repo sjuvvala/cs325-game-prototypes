@@ -100,7 +100,8 @@ window.onload = function() {
        // bouncy.rotation = game.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
         
         //  400 is the speed it will move towards the mouse
-        game.physics.arcade.moveToPointer(player, 900);
+        //game.physics.arcade.moveToPointer(player, 900);
+        game.physics.arcade.moveToPointer(player);
 
         //  if it's overlapping the mouse, don't move any more
         if (Phaser.Rectangle.contains(player.body, game.input.x, game.input.y))
