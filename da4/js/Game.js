@@ -21,6 +21,7 @@ GameStates.makeGame = function( game, shared ) {
 	var attackKey = null; //will be spacebar
 	var cursors = null;
 	var jumpTimer = 0;
+	
     
     function quitGame() {
 
@@ -146,6 +147,7 @@ GameStates.makeGame = function( game, shared ) {
 			
 			//hit....................................
 			demonGirl.body.onBeginContact.add(hitStuffed, this);
+			
         },
     
         update: function () {
@@ -188,6 +190,8 @@ GameStates.makeGame = function( game, shared ) {
 				//s_body.body.velocity.x = 500;
 				//s_body.body.velocity.y = -500;
 			}
+			
+			 game.debug.text('Time wasted: ' + this.game.time.totalElapsedSeconds(), 32, 32);
 			
         }
     };
