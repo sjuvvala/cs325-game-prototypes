@@ -37,6 +37,10 @@ GameStates.makePreloader = function( game ) {
 			
 			game.load.physics('s_data', 'assets/stuffed.json');
 			
+			game.load.image('b1', 'assets/b1.png');
+			game.load.image('b2', 'assets/b2.png');
+			game.load.image('b3', 'assets/b3.png');
+			
         },
     
         create: function () {

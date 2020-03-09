@@ -22,6 +22,11 @@ GameStates.makeGame = function( game, shared ) {
 	var cursors = null;
 	var jumpTimer = 0;
 	
+	//extra!! change background
+	var backgroundKey = null; //B
+	var bNum = 0;
+	var currb = null;
+	
     
     function quitGame() {
 
@@ -44,6 +49,34 @@ GameStates.makeGame = function( game, shared ) {
 			}
 			s_body.body.velocity.y = game.rnd.integerInRange(-800,-400);
 		}
+	}
+	
+	function changeBackground() {
+		if(bNum===8){bNum = 0;}
+		if(bNum===0){game.stage.backgroundColor = "#7099ff";}
+		else if(bNum===1){game.stage.backgroundColor = "#fff670";}
+		else if(bNum===2){game.stage.backgroundColor = "#ff2989";}
+		else if(bNum===3){game.stage.backgroundColor = "#29ff4e";}
+		else if(bNum===4){
+			currb = game.add.sprite(0,0, 'b1');
+			currb.sendToBack();
+		}
+		else if(bNum===5){
+			currb.kill();
+			currb = game.add.sprite(0,0, 'b2');
+			currb.sendToBack();
+		}
+		else if(bNum===6){
+			currb.kill();
+			currb = game.add.sprite(0,0, 'b3');
+			currb.sendToBack();
+		}
+		else if(bNum===7){
+			currb.kill();
+			game.stage.backgroundColor = "#f0f0f0"; //set back to default
+		}
+		bNum++;
+		
 	}
 	
     
@@ -115,8 +148,8 @@ GameStates.makeGame = function( game, shared ) {
 			s_armR.body.collideWorldBounds = true;
 			
 			game.physics.p2.createRevoluteConstraint(s_body, [0, -60], s_head, [0, 45], 100);
-			game.physics.p2.createRevoluteConstraint(s_body, [-40, 35], s_legL, [-12, -25], 100);
-			game.physics.p2.createRevoluteConstraint(s_body, [35, 45], s_legR, [-25, -40], 100);
+			game.physics.p2.createRevoluteConstraint(s_body, [-40, 35], s_legL, [-12, -25], 200);
+			game.physics.p2.createRevoluteConstraint(s_body, [35, 45], s_legR, [-25, -40], 200);
 			game.physics.p2.createRevoluteConstraint(s_body, [-60, -40], s_armL, [25, 0], 200);
 			game.physics.p2.createRevoluteConstraint(s_body, [60, -40], s_armR, [-30, 0], 200);
 			
@@ -133,8 +166,9 @@ GameStates.makeGame = function( game, shared ) {
 			demonGirl.animations.add('attackL', [1,2,0], 5, false);
 			demonGirl.animations.add('attackR', [4,3,5], 5, false);
 			
-			//keys...........................................................................
+			//keyboard input.................................................................
 			attackKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+			backgroundKey = game.input.keyboard.addKey(Phaser.Keyboard.B);
 			cursors = game.input.keyboard.createCursorKeys();
 			
 			//materials......................................................................
@@ -142,12 +176,20 @@ GameStates.makeGame = function( game, shared ) {
 			var worldMaterial = game.physics.p2.createMaterial('worldMaterial');
 			var sMaterial = game.physics.p2.createMaterial('worldMaterial');
 			game.physics.p2.setWorldMaterial(worldMaterial, true, true, true, true);
+			
 			var groundPlayerCM = game.physics.p2.createContactMaterial(dgMaterial, worldMaterial, { friction: 0.0 });
 			var groundStuffCM = game.physics.p2.createContactMaterial(worldMaterial, sMaterial, { friction: 0.6 });
+			
+			//var sdgfriction = game.physics.p2.createContactMaterial(dgMaterial, sMaterial, {friction: 0.8});
 			
 			//hit....................................
 			demonGirl.body.onBeginContact.add(hitStuffed, this);
 			
+			//b............................................
+			//game.input.onDown.add(changeBackground, this);
+			//backgroundKey.event.onInputDown.add(changeBackground, this); wrong 
+			//backgroundKey.events.onInputDown(changeBackground, this); wrong
+			backgroundKey.onDown.add(changeBackground, this); //yes!
         },
     
         update: function () {
@@ -190,6 +232,10 @@ GameStates.makeGame = function( game, shared ) {
 				//s_body.body.velocity.x = 500;
 				//s_body.body.velocity.y = -500;
 			}
+			
+			/*if(backgroundKey.isDown){
+				changeBackground();
+			}*/
 			
 			 game.debug.text('Time wasted: ' + this.game.time.totalElapsedSeconds(), 32, 32);
 			
