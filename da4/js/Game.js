@@ -27,6 +27,9 @@ GameStates.makeGame = function( game, shared ) {
 	var bNum = 0;
 	var currb = null;
 	
+	var swingSound;
+	var bgmusic;
+	var musicButton; //M
     
     function quitGame() {
 
@@ -40,14 +43,26 @@ GameStates.makeGame = function( game, shared ) {
 	
 	//launch it in an unrealistic way
 	function hitStuffed(body, bodyB, shapeA, shapeB, equation){
-		if(body && attackKey.isDown){
+		if(body && (attackKey.isDown || cursors.down.isDown) ){
 			if(facing === 0){
 				s_body.body.velocity.x = game.rnd.integerInRange(-800,-400);
 			}
 			else if(facing === 1){
-				s_body.body.velocity.x = game.rnd.integerInRange(400,800);
+				s_body.body.velocity.x = game.rnd.integerInRange(400,700);
 			}
-			s_body.body.velocity.y = game.rnd.integerInRange(-800,-400);
+			s_body.body.velocity.y = game.rnd.integerInRange(-700,-400);
+		}
+	}
+	
+	function controlMusic(){
+		if(bgmusic.volume===0.0){
+			bgmusic.volume = 0.5;
+		}
+		if(bgmusic.paused){
+			bgmusic.resume();
+		}
+		else if(!bgmusic.paused){
+			bgmusic.pause();
 		}
 	}
 	
@@ -147,13 +162,13 @@ GameStates.makeGame = function( game, shared ) {
 			s_armR.body.loadPolygon('s_data', 'armR');
 			s_armR.body.collideWorldBounds = true;
 			
-			game.physics.p2.createRevoluteConstraint(s_body, [0, -60], s_head, [0, 45], 100);
+			game.physics.p2.createRevoluteConstraint(s_body, [0, -60], s_head, [0, 45], 200);
 			game.physics.p2.createRevoluteConstraint(s_body, [-40, 35], s_legL, [-12, -25], 200);
 			game.physics.p2.createRevoluteConstraint(s_body, [35, 45], s_legR, [-25, -40], 200);
 			game.physics.p2.createRevoluteConstraint(s_body, [-60, -40], s_armL, [25, 0], 200);
 			game.physics.p2.createRevoluteConstraint(s_body, [60, -40], s_armR, [-30, 0], 200);
 			
-			s_body.body.mass = 900;
+			s_body.body.mass = 800;
 			
 			//player!........................................................................
 			demonGirl = game.add.sprite(200, 476, 'demonGirl');
@@ -169,6 +184,7 @@ GameStates.makeGame = function( game, shared ) {
 			//keyboard input.................................................................
 			attackKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 			backgroundKey = game.input.keyboard.addKey(Phaser.Keyboard.B);
+			musicButton = game.input.keyboard.addKey(Phaser.Keyboard.M);
 			cursors = game.input.keyboard.createCursorKeys();
 			
 			//materials......................................................................
@@ -190,15 +206,25 @@ GameStates.makeGame = function( game, shared ) {
 			//backgroundKey.event.onInputDown.add(changeBackground, this); wrong 
 			//backgroundKey.events.onInputDown(changeBackground, this); wrong
 			backgroundKey.onDown.add(changeBackground, this); //yes!
+			
+			//s...........................................
+			swingSound = game.sound.add('swing');
+			swingSound.volume = 0.3;
+			
+			bgmusic = game.sound.add('bgmusic');
+			bgmusic.volume = 0.0; 
+			bgmusic.loop = true;
+			bgmusic.play();
+			//bgmusic.play(null, null, 0.0, true);
+			musicButton.onDown.add(controlMusic, this);
         },
     
         update: function () {
-    
             //  Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
             
             // Accelerate the 'logo' sprite towards the cursor,
             // accelerating at 500 pixels/second and moving no faster than 500 pixels/second
-            // in X or Y.
+            // in X or Y
             // This function returns the rotation angle that makes it visually match its
             // new trajectory.
             //bouncy.rotation = game.physics.arcade.accelerateToPointer( bouncy, game.input.activePointer, 500, 500, 500 );
@@ -206,12 +232,12 @@ GameStates.makeGame = function( game, shared ) {
 			if(cursors.left.isDown){
 				demonGirl.frame = 0;
 				facing = 0;
-				demonGirl.body.moveLeft(300);
+				demonGirl.body.moveLeft(400);
 			}
 			else if(cursors.right.isDown){
 				demonGirl.frame = 5;
 				facing = 1;
-				demonGirl.body.moveRight(300);
+				demonGirl.body.moveRight(400);
 			}
 			else{
 				demonGirl.body.velocity.x = 0;
@@ -222,7 +248,8 @@ GameStates.makeGame = function( game, shared ) {
 				jumpTimer = game.time.now + 750;
 			}
 			
-			if(attackKey.isDown){
+			if(attackKey.isDown || cursors.down.isDown){
+				swingSound.play();
 				if(facing === 0){
 					demonGirl.animations.play('attackL');
 				}

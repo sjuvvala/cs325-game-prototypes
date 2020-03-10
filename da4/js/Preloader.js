@@ -41,6 +41,9 @@ GameStates.makePreloader = function( game ) {
 			game.load.image('b2', 'assets/b2.png');
 			game.load.image('b3', 'assets/b3.png');
 			
+			game.load.audio('swing', ['assets/bamboo-swing-a5.wav']);
+			game.load.audio('bgmusic', ['assets/Bloodgod_-_05_-_Satans_Smile.mp3']);
+			
         },
     
         create: function () {
