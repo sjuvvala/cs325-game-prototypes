@@ -51,6 +51,7 @@ GameStates.makePreloader = function( game ) {
 			game.load.spritesheet('gran', 'assets/old_lady.png', 368, 465);
 			
 			game.load.audio('alien_music', ['assets/Humanfobia_-_03_-_Alien_Radar.mp3']);
+			game.load.audio('meow', ['assets/Meow.ogg']);
         },
     
         create: function () {

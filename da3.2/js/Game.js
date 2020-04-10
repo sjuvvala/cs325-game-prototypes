@@ -21,9 +21,9 @@ GameStates.makeGame = function( game, shared ) {
 	var score = null;
     var scoreText = null;
 	
-	//
-	var alien_music;
-    
+    //m
+	var meow;
+	
     function quitGame() {
 
         //  Here you should destroy anything you no longer need.
@@ -287,10 +287,9 @@ GameStates.makeGame = function( game, shared ) {
 			score = 0;
 			scoreText = game.add.text(16, 16, 'cats converted: 0', { fontSize: '16px', fill: '#000' });
 			
-			//music!
-			alien_music = game.sound.add('alien_music');
-			alien_music.volume = 0.5; 
-			//loop?
+			//meow sound
+			meow = game.sound.add('meow');
+			
         },
     
         update: function () {
@@ -358,6 +357,7 @@ GameStates.makeGame = function( game, shared ) {
 				if(gray.currframe === 5 && gray.isConverted === false){
 					gray.isConverted = true;
 					scoreincr();
+					meow.play();
 				}
 			}
 			
@@ -367,6 +367,7 @@ GameStates.makeGame = function( game, shared ) {
 				if(brown.currframe === 5 && brown.isConverted === false){
 					brown.isConverted = true;
 					scoreincr();
+					meow.play();
 				}
 			}
 			
@@ -376,6 +377,7 @@ GameStates.makeGame = function( game, shared ) {
 				if(calico.currframe === 5 && calico.isConverted === false){
 					calico.isConverted = true;
 					scoreincr();
+					meow.play();
 				}
 			}
 			
@@ -385,6 +387,7 @@ GameStates.makeGame = function( game, shared ) {
 				if(tux.currframe === 5 && tux.isConverted === false){
 					tux.isConverted = true;
 					scoreincr();
+					meow.play();
 				}
 			}
 			
@@ -394,6 +397,7 @@ GameStates.makeGame = function( game, shared ) {
 				if(white.currframe === 5 && white.isConverted === false){
 					white.isConverted = true;
 					scoreincr();
+					meow.play();
 				}
 			}
 			
