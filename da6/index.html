@@ -32,29 +32,34 @@ body
 <div id="game"></div>
 <div id="readme">
 <h2>Materialize</h2>
+<p>Not my proposed game and not Alien Cat. I wanted to try something more fun in terms of design.</p>
+<p>Alien Cat is filled with spaghetti code and I don't want to deal with it anymore</p>
 
 <ul>
 <li><strong>Originality:</strong>
-What is original about your game?
+<ul>
+<li>Not sure. Even though I came up with this idea myself, something tells me this already exists and I don't know.</li>
+</ul>
 </li>
 
 <li><strong>Technical Merit:</strong>
-What is interesting about your game technology?
+<ul>
+<li>Nothing too interesting. Just utilizing arcade physics and other basic Phaser capabilites</li>
+<li>Most interesting thing could be that the player can pick up certain objects (in this case the violet-colored crystal thing)</li>
+</ul>
 </li>
 
 <li><strong>Prototype Postmortem:</strong>
-What did you learn from this prototype?
-What was the easiest or hardest part of making it?
+<ul>
+<li>Phaser is not that painful to work with anymore.</li>
+<li>The hardest part is coming up with puzzles. For now this is a simple tutorial type puzzle, but I need more complicated ones for the next iteration</li>
+</ul>
 </li>
 
 <li><strong>Prototype Assets:</strong>
 Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
 <ul>
-<li>Loading screen: self-made</li>
-<li>Puppy image: self-made</li>
-<li>Button: Phaser example <a href="https://phaser.io/examples/v2/buttons/action-on-click">Action On Click</a></li>
-<li>Bouncing Phaser image: <a href="https://phaser.io/download/logo">Phaser logo</a></li>
-<li>Music: "Poppers and Prosecco" Kevin MacLeod (<a href="incompetech.com">incompetech.com</a>). Licensed under <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons: By Attribution 3.0 License</a></li>
+<li>Everything was made by me except for the loading bar and the sound effect from freesound.org</li>
 </ul>
 </li>
 
@@ -62,11 +67,14 @@ Did you make your prototype assets from scratch? Did you borrow them? Cite your 
 Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
 <ul>
 <li>The code for this example is adapted from the <a href="https://github.com/photonstorm/phaser/tree/v2.6.2/resources/Project%20Templates/Basic">Phaser Basic Project Template</a></li>
+<li>It's similar to Super Mario Odyssey in terms of possessing things</li>
 </ul>
 </li>
 
 <li><strong>High Concept:</strong>
-A one-sentence summary of your game.
+<ul>
+<li>A girl who can separate her soul from her body and take control of living things in on an adventure to discover the secrets of her powers and the consequences that come with them</li>
+</ul>
 </li>
 
 <li><strong>Theme:</strong>
@@ -75,35 +83,72 @@ State which of the Storymatic themes you used.
 
 <li><strong>Mandated Variety:</strong>
 State which input, randomness, genre, and play style you used in this prototype.
+<ul>
+<li> It's supposed to be a puzzle platformer, but there isn't much platformer yet</li>
+</ul>
 </li>
 
 <li><strong>Prototype Goal:</strong>
 What game mechanic is this prototype evaluating?
+<ul><li>For now, interacting with in game objects and being able to control multiple things (girl, cat, or soul) as the player</li></ul>
 </li>
 
 <li><strong>Player Experience Goals:</strong>
 What experience do you want players to have when playing your game?
+<ul>
+<li>I want it to be not boring</li>
+</ul>
 </li>
 
 <li><strong>Gameplay:</strong>
 A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
+<ul>
+<li>The girl can pretty much move around, jump, and interact with objects in the game (and so can the cat). (this could vary based on what she could possess)</li>
+<li>In soul form, you can float through platforms but cannot interact with anything unless you are possessing something or returning to your body. </li>
+<ul><li>The crystal thing is an exception to this. It allows the player(the girl) to teleport to the location of the crystal</li></ul>
+<li>For this level, you need to get to the mysterious door with a symbol on it</li>
+<li>Another note: the player must be in control of the girl(the main character) in order to proceed.</li>
+<ul><li>I'm also planning on adding a time limit as to how long you can be separated from the girl</li></ul>
+<li>Basic Controls:</li>
+<ul><li>In material form: right/left arrow keys or A and D to move; up arrow or W to jump; down arrow or S to separate soul; SPACE, E, or F to interact</li></ul>
+<ul><li>In soul form: arrow keys or WASD to move; SPACE, E, or F to possess/interact </li></ul>
+</ul>
 </li>
 
 <li><strong>Strategies:</strong>
 What player strategies do you expect will be effective at playing this game?
+<ul>
+<li>Try interacting with everything to see what you can do</li>
+<li>Solution:</li>
+<ul>
+<li>Take control of the cat. The lever will open the top platform. Push the box until it falls to the lower platform.</li>
+<li>Return to the girl. The door is locked so teleport to crystal. Open the door from the inside (you have to be moving against the door to open it because Phaser is weird)</li>
+<li>Take the key and pick up the crystal. Jump on the box and throw the crystal over to the upper platform and teleport</li>
+</ul>
+</ul>
 </li>
 
 <li><strong>Story/Setting/Premise:</strong>
 A paragraph about the world your game is set in and who the characters are. What makes the game world and its occupants unique and interesting? Do the tokens represent something? If the game has a backstory, mention it here. If the game is abstract, then say so.
 How will the dramatic tension interact with the gameplay tension?
+<ul>
+<li>I haven't come up with a detailed story yet, but the setting will be somewhat dark/gloomy and the girl is dead inside (literally)</li>
+<li>the girl is pretty weak and can't attack directly in most cases (if there are enemies). She'll have to rely on her power and various resources in the game.</li>
+</ul>
 </li>
 
 <li><strong>Target Audience:</strong>
 A single sentence that describes the demographic you're trying to reach.
+<ul>
+<li>for people who enjoy puzzle platformers</li>
+</ul>
 </li>
 
 <li><strong>Play Time:</strong>
 How long does your game take to play?
+<ul>
+<li>1-2 min</li>
+</ul>
 </li>
 
 </ul>
